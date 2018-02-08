@@ -57,4 +57,17 @@ I am allowing users to read reviews of a selected movie.
 I’ll also allow users to mark a movie as a favorite in the details view by tapping a button(star). This is for a local movies collection that you will maintain and does not require an API request*.
 I’ll modify the existing sorting criteria for the main view to include an additional pivot to show their favorites collection.
 
+![screenshot_1518070381](https://user-images.githubusercontent.com/7755518/35958222-469e064e-0ca8-11e8-9c4e-8e014917c39b.png)
+
+
+![screenshot_1518070397](https://user-images.githubusercontent.com/7755518/35958245-64b79c80-0ca8-11e8-9143-167c1892261a.png)
+
+
+![screenshot_1518070423](https://user-images.githubusercontent.com/7755518/35958261-7bfee218-0ca8-11e8-830f-f375e4a7fbaa.png)
+
+
+![screenshot_1518070486](https://user-images.githubusercontent.com/7755518/35958274-8ced7eb8-0ca8-11e8-9573-db38392177c1.png)
+
+
+![screenshot_1518070677](https://user-images.githubusercontent.com/7755518/35958288-a142cf80-0ca8-11e8-96ff-7bccc60211a5.png)
 
