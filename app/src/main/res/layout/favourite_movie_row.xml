@@ -1,0 +1,21 @@
+<RelativeLayout android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:padding="16dp"
+    tools:context="popularmovies.theo.tziomakas.popularmovies.DetailsFragment"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <TextView
+         android:id="@+id/fav_movie_title"
+         android:text=""
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+         android:layout_alignLeft="@+id/movie_image"
+         android:padding="8dp"
+         android:textAppearance="@style/AlertDialog.AppCompat.Light"
+         android:textSize="16sp"
+         android:textStyle="bold"/>
+
+
+</RelativeLayout>
+
