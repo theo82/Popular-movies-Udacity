@@ -15,6 +15,7 @@
         tools:context=".MainActivityFragment"
         android:id="@+id/movies_grid_view">
     </android.support.v7.widget.RecyclerView>
+
     <TextView
         android:id="@+id/tv_error_message_display"
         android:layout_width="wrap_content"

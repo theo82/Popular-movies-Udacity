@@ -45,7 +45,7 @@ import popularmovies.theo.tziomakas.popularmovies.utitilities.MovieLoader;
  * and other that queries data from the db.
  */
 public class MainActivityFragment extends Fragment
-                            implements LoaderManager.LoaderCallbacks<Object>, MoviesAdapter.MoviesAdapterOnClickHandler {
+        implements LoaderManager.LoaderCallbacks<Object>, MoviesAdapter.MoviesAdapterOnClickHandler {
 
 
 
@@ -81,6 +81,8 @@ public class MainActivityFragment extends Fragment
 
     private  TextView mErrorMessageDisplay;
 
+
+
     private  ProgressBar mLoadingIndicator;
 
     /********************************************************************************
@@ -107,58 +109,31 @@ public class MainActivityFragment extends Fragment
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-           super.onActivityCreated(savedInstanceState);
+        super.onActivityCreated(savedInstanceState);
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                                                 Bundle savedInstanceState) {
+                             Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View rootView = inflater.inflate(R.layout.fragment_main, container, false);
 
-           if(savedInstanceState == null) {
+        if(savedInstanceState == null) {
 
              /* This TextView is used to display errors and will be hidden if there are no errors */
-               mErrorMessageDisplay = rootView.findViewById(R.id.tv_error_message_display);
+            mErrorMessageDisplay = rootView.findViewById(R.id.tv_error_message_display);
 
-               moviesArrayList = new ArrayList<>();
+            moviesArrayList = new ArrayList<>();
 
-               recyclerView = rootView.findViewById(R.id.movies_grid_view);
-
-
-               adapter = new MoviesAdapter(getActivity(), moviesArrayList, this);
+            recyclerView = rootView.findViewById(R.id.movies_grid_view);
 
 
-               GridLayoutManager gridLayoutManager = new GridLayoutManager(getActivity(), 2);
-
-               recyclerView.setLayoutManager(gridLayoutManager);
+            adapter = new MoviesAdapter(getActivity(), moviesArrayList, this);
 
 
-        /*
+            GridLayoutManager gridLayoutManager = new GridLayoutManager(getActivity(), 2);
 
-        * The ProgressBar that will indicate to the user that we are loading data. It will be
-        * hidden when no data is loading.
-        *
-        * Please note: This so called "ProgressBar" isn't a bar by default. It is more of a
-        * circle. We didn't make the rules (or the names of Views), we just follow them.
-        */
-               mLoadingIndicator = rootView.findViewById(R.id.pb_loading_indicator);
-
-               recyclerView.setAdapter(adapter);
-
-
-           }else{
-               moviesArrayList = savedInstanceState.getParcelableArrayList(ARRAY_LIST);
-
-               recyclerView = rootView.findViewById(R.id.movies_grid_view);
-
-
-               adapter = new MoviesAdapter(getActivity(), moviesArrayList, this);
-
-
-               GridLayoutManager gridLayoutManager = new GridLayoutManager(getActivity(), 2);
-
-               recyclerView.setLayoutManager(gridLayoutManager);
+            recyclerView.setLayoutManager(gridLayoutManager);
 
 
         /*
@@ -169,10 +144,40 @@ public class MainActivityFragment extends Fragment
         * Please note: This so called "ProgressBar" isn't a bar by default. It is more of a
         * circle. We didn't make the rules (or the names of Views), we just follow them.
         */
-               mLoadingIndicator = rootView.findViewById(R.id.pb_loading_indicator);
+            mLoadingIndicator = rootView.findViewById(R.id.pb_loading_indicator);
 
-               recyclerView.setAdapter(adapter);
-           }
+            recyclerView.setAdapter(adapter);
+
+
+        }else{
+            moviesArrayList = savedInstanceState.getParcelableArrayList(ARRAY_LIST);
+
+            recyclerView = rootView.findViewById(R.id.movies_grid_view);
+
+
+            adapter = new MoviesAdapter(getActivity(), moviesArrayList, this);
+
+
+            GridLayoutManager gridLayoutManager = new GridLayoutManager(getActivity(), 2);
+
+            recyclerView.setLayoutManager(gridLayoutManager);
+
+
+        /*
+
+        * The ProgressBar that will indicate to the user that we are loading data. It will be
+        * hidden when no data is loading.
+        *
+        * Please note: This so called "ProgressBar" isn't a bar by default. It is more of a
+        * circle. We didn't make the rules (or the names of Views), we just follow them.
+        */
+            mLoadingIndicator = rootView.findViewById(R.id.pb_loading_indicator);
+
+            recyclerView.setAdapter(adapter);
+        }
+
+
+
 
         return rootView;
     }
@@ -184,12 +189,14 @@ public class MainActivityFragment extends Fragment
      * Since it is okay to redundantly set the visibility of a View, we don't
      * need to check whether each view is currently visible or invisible.
      */
-     public  void showErrorMessage() {
+    public  void showErrorMessage() {
                                 /* First, hide the currently visible data */
-         recyclerView.setVisibility(View.INVISIBLE);
+        recyclerView.setVisibility(View.INVISIBLE);
                                 /* Then, show the error */
-         mErrorMessageDisplay.setVisibility(View.VISIBLE);
-     }
+        mErrorMessageDisplay.setVisibility(View.VISIBLE);
+    }
+
+
 
     @Override
     public void onResume() {
@@ -206,7 +213,7 @@ public class MainActivityFragment extends Fragment
         }else {
 
             Log.v(LOG_TAG,sortingCriteria);
-
+            adapter.clear();
             getLoaderManager().restartLoader(FAV_MOVIES_ID, null, this);
             getLoaderManager().destroyLoader(MOVIES_LOADER_ID);
         }
@@ -307,11 +314,11 @@ public class MainActivityFragment extends Fragment
                 }
                 adapter.setMoviesData(movies);
 
-
-
             }else{
-                //showErrorMessage();
-                //getLoaderManager().initLoader(MOVIES_LOADER_ID,null,this);
+                //recyclerView.setVisibility(View.INVISIBLE);
+                //getLoaderManager().destroyLoader(MOVIES_LOADER_ID);
+                adapter.clear();
+
                 Toast.makeText(getActivity(),"You haven't added a movie as favourite",Toast.LENGTH_SHORT).show();
             }
         }

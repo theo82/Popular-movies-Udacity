@@ -67,8 +67,6 @@ import popularmovies.theo.tziomakas.popularmovies.utitilities.NetworkUtils;
 
                 }
 
-
-
                 @Override
                 public int getItemCount() {
                     return moviesList.size();
@@ -77,6 +75,12 @@ import popularmovies.theo.tziomakas.popularmovies.utitilities.NetworkUtils;
                 public void setMoviesData(List<Movies> moviesList){
                     this.moviesList = moviesList;
                     notifyDataSetChanged();
+                }
+
+                public void clear() {
+                    int size = this.moviesList.size();
+                    this.moviesList.clear();
+                    notifyItemRangeRemoved(0, size);
                 }
 
                 public class MoviesViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
