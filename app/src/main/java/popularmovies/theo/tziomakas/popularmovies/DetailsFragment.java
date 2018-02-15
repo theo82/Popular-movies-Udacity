@@ -190,7 +190,7 @@
                 // Inflate the layout for this fragment
                 View root = inflater.inflate(R.layout.fragment_details, container, false);
 
-                ButterKnife.bind(this, root);
+                unbinder = ButterKnife.bind(this, root);
                 Intent intent = getActivity().getIntent();
                 mMovieId = intent.getStringExtra("movieId");
 
@@ -204,8 +204,6 @@
 
 
                 b = root.findViewById(R.id.add_favourite);
-
-                ButterKnife.bind(getActivity());
 
                 /*******************
                  *      Movies     *
