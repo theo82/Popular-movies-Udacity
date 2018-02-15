@@ -18,7 +18,7 @@ android {
     }
 
     buildTypes.each {
-        it.buildConfigField 'String', 'MOVIESDB_API_KEY', "\"API_KEY_GOES_HERE\""
+        it.buildConfigField 'String', 'MOVIESDB_API_KEY', "\"da9c52d611f8fc0d041fe4505d06ba0f\""
     }
 }
 
@@ -36,7 +36,8 @@ dependencies {
     compile 'com.squareup.retrofit2:converter-gson:2.3.0'
     compile 'com.android.support:recyclerview-v7:26.0.1'
     compile 'com.jakewharton:butterknife:8.8.1'
-
+    compile 'com.jakewharton:butterknife:8.4.0'
+    annotationProcessor 'com.jakewharton:butterknife-compiler:8.4.0'
 
     implementation 'com.android.support:recyclerview-v7:26.1.0'
 }
