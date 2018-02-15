@@ -9,6 +9,8 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import com.squareup.picasso.Picasso;
 import java.util.List;
+
+import butterknife.ButterKnife;
 import popularmovies.theo.tziomakas.popularmovies.R;
 import popularmovies.theo.tziomakas.popularmovies.model.Movies;
 import popularmovies.theo.tziomakas.popularmovies.utitilities.NetworkUtils;
@@ -46,6 +48,7 @@ import popularmovies.theo.tziomakas.popularmovies.utitilities.NetworkUtils;
                     boolean shouldAttactToParentImmediately = false;
 
                     View view = inflater.inflate(layoutIdForListItem,parent,shouldAttactToParentImmediately);
+
 
                     MoviesViewHolder moviesViewHolder = new MoviesViewHolder(view);
 

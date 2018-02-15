@@ -41,6 +41,8 @@ import com.squareup.picasso.Picasso;
 import java.util.ArrayList;
 import java.util.List;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
 import popularmovies.theo.tziomakas.popularmovies.adapters.MyDividerItemDecoration;
 import popularmovies.theo.tziomakas.popularmovies.adapters.ReviewsAdapter;
 import popularmovies.theo.tziomakas.popularmovies.adapters.TrailersAdapter;
@@ -63,65 +65,80 @@ import retrofit2.Response;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class DetailsFragment extends Fragment implements
-        LoaderManager.LoaderCallbacks<Object>,
-        TrailersAdapter.TrailersAdapterOnClickHandler{
-    private static final int TRAILERS_LOADER_ID = 0;
-    private static final int REVIEWS_LOADER_ID =   1;
+            public class DetailsFragment extends Fragment implements
+                    LoaderManager.LoaderCallbacks<Object>,
+                    TrailersAdapter.TrailersAdapterOnClickHandler{
+                private static final int TRAILERS_LOADER_ID = 0;
+                private static final int REVIEWS_LOADER_ID =   1;
 
-    private static final String TRAILERS_LAYOUT = "DetailsFragment.trailer.layout";
-    private static final String REVIEWS_LAYOUT = "DetailsFragment.review.layout";
+                private static final String TRAILERS_LAYOUT = "DetailsFragment.trailer.layout";
+                private static final String REVIEWS_LAYOUT = "DetailsFragment.review.layout";
 
-    int recyclerViewOrientation = LinearLayoutManager.VERTICAL;
+                int recyclerViewOrientation = LinearLayoutManager.VERTICAL;
 
-    private static final String TRAILERS_LIST = "trailers_list";
-    private static final String REVIEWS_LIST = "reviews_list";
-    /*****************************************************
-     * Lists where fetched trailers and reviews are stored.
-     *****************************************************/
-    private List<Trailers> trailersList = new ArrayList<>();
-    private List<Reviews> reviewsList = new ArrayList<>();
+                private static final String TRAILERS_LIST = "trailers_list";
+                private static final String REVIEWS_LIST = "reviews_list";
+                /*****************************************************
+                 * Lists where fetched trailers and reviews are stored.
+                 *****************************************************/
+                private List<Trailers> trailersList = new ArrayList<>();
+                private List<Reviews> reviewsList = new ArrayList<>();
 
-    private static final String[] FAVOURITE_MOVIE_PROJECTION = {
-            FavouriteContract.FavouriteEntry.COLUMN_MOVIE_ID,
-            FavouriteContract.FavouriteEntry.COLUMN_MOVIE_POSTER_PATH,
-            FavouriteContract.FavouriteEntry.COLUMN_MOVIE_TITLE,
-            FavouriteContract.FavouriteEntry.COLUMN_MOVIE_OVERVIEW,
-            FavouriteContract.FavouriteEntry.COLUMN_MOVIE_VOTE_AVERAGE,
-            FavouriteContract.FavouriteEntry.COLUMN_MOVIE_RELEASE_DATE
-    };
+                private static final String[] FAVOURITE_MOVIE_PROJECTION = {
+                        FavouriteContract.FavouriteEntry.COLUMN_MOVIE_ID,
+                        FavouriteContract.FavouriteEntry.COLUMN_MOVIE_POSTER_PATH,
+                        FavouriteContract.FavouriteEntry.COLUMN_MOVIE_TITLE,
+                        FavouriteContract.FavouriteEntry.COLUMN_MOVIE_OVERVIEW,
+                        FavouriteContract.FavouriteEntry.COLUMN_MOVIE_VOTE_AVERAGE,
+                        FavouriteContract.FavouriteEntry.COLUMN_MOVIE_RELEASE_DATE
+                };
 
-    /**************************************************************************
-     * Those custom adapter will actually send the views to the recycler views.
-     **************************************************************************/
-    private  TrailersAdapter trailersAdapter;
-    private  ReviewsAdapter reviewsAdapter;
+                /**************************************************************************
+                 * Those custom adapter will actually send the views to the recycler views.
+                 **************************************************************************/
+                private  TrailersAdapter trailersAdapter;
+                private  ReviewsAdapter reviewsAdapter;
 
-    /*******************************************
-     * RecyclerViews that will display our data.
-     *******************************************/
-    private  RecyclerView trailersRecyclerView;
-    private  RecyclerView reviewsRecyclerView;
+                /*******************************************
+                 * RecyclerViews that will display our data.
+                 *******************************************/
+                private  RecyclerView trailersRecyclerView;
+                private  RecyclerView reviewsRecyclerView;
 
 
-    private static final String MOVIE_SHARE_HASHTAG = " #PopularMoviesApp";
-    private static final String LOG_TAG = "DetailsFragment";
+                private static final String MOVIE_SHARE_HASHTAG = " #PopularMoviesApp";
+                private static final String LOG_TAG = "DetailsFragment";
 
-    private Cursor favoriteCursor;
-    private String mMovieId;
-    private String mImage;
-    private String mTitle;
-    private double mRating;
-    private String mDate;
-    private String mOverview;
-    private String oldReviewText;
-    private TextView noReviewTextView;
-    private TextView noTrailersTextView;
-    private ImageView i;
-    private TextView t;
-    private TextView r;
-    private TextView d;
-    private TextView o;
+                private Cursor favoriteCursor;
+                private String mMovieId;
+                private String mImage;
+                private String mTitle;
+                private double mRating;
+                private String mDate;
+                private String mOverview;
+                private String oldReviewText;
+
+                @BindView(R.id.no_reviews_text_view)
+                public TextView noReviewTextView;
+
+                @BindView(R.id.no_trailers_text_view)
+                public TextView noTrailersTextView;
+
+                @BindView(R.id.movie_image)
+                public ImageView i;
+
+                @BindView(R.id.movie_title)
+                public TextView t;
+
+                @BindView(R.id.movie_rating)
+                public TextView r;
+
+                @BindView(R.id.movie_date)
+                public TextView d;
+
+                @BindView(R.id.movie_overview)
+                public TextView o;
+
     private ToggleButton b;
     private Uri uri;
     public DetailsFragment() {
@@ -152,12 +169,6 @@ public class DetailsFragment extends Fragment implements
                 String oldOverview = savedInstanceState.getString("overview");
                 String oldImage = savedInstanceState.getString("image");
 
-
-
-
-
-
-
                 t.setText(oldTitle);
                 r.setText(oldRating);
                 d.setText(oldDate);
@@ -184,21 +195,11 @@ public class DetailsFragment extends Fragment implements
         mDate = intent.getStringExtra("date");
         mOverview = intent.getStringExtra("overview");
         */
-        i = root.findViewById(R.id.movie_image);
 
-        t = root.findViewById(R.id.movie_title);
-
-        r = root.findViewById(R.id.movie_rating);
-
-        d = root.findViewById(R.id.movie_date);
-
-        o = root.findViewById(R.id.movie_overview);
 
         b = root.findViewById(R.id.add_favourite);
 
-        noReviewTextView = root.findViewById(R.id.no_reviews_text_view);
-
-        noTrailersTextView = root.findViewById(R.id.no_trailers_text_view);
+        ButterKnife.bind(getActivity());
 
         /*******************
          *      Movies     *
