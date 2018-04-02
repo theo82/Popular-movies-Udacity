@@ -47,9 +47,6 @@ import popularmovies.theo.tziomakas.popularmovies.utitilities.MovieLoader;
 public class MainActivityFragment extends Fragment
         implements LoaderManager.LoaderCallbacks<Object>, MoviesAdapter.MoviesAdapterOnClickHandler {
 
-
-
-
     private static final String LOG_TAG = "MainActivityFragment";
     private static final String BUNDLE_GRID_LAYOUT = "grid_view";
 
