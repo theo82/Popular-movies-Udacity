@@ -30,7 +30,6 @@ public class MovieLoader extends AsyncTaskLoader<List<Movies>> {
     protected void onStartLoading() {
         forceLoad();
     }
-
     @Override
     public List<Movies> loadInBackground() {
 
